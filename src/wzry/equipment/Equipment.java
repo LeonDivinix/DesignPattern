@@ -10,32 +10,23 @@ public class Equipment {
      * 装备编号
      */
     private String code;
-
-    /**
-     * 加攻击速度
-     */
-    private int addAttackRate = 0;
-    /**
-     * 加暴击几率
-     */
-    private int addCriticalHitRate = 0;
-    /**
-     * 加移动速度
-     */
-    private int addMoveSpeedRate = 0;
+    private String name;
 
     public String getCode() {
         return code;
     }
 
+    public String getName() {
+        return name;
+    }
 
     /**
      * 根据code获得装备配置数据
      * @param code 装备编号
      * @return 装备配置数据
      */
-    private Map<String, Integer> getConfigByCode(String code) {
-        Map<String, Integer> result = new HashMap<>();
+    private Map<String, Object> getConfigByCode(String code) {
+        Map<String, Object> result = new HashMap<>();
         // todo 从数据源(数据库,redis,文件,接口等)获得该装备配置数据(配置数据由后台配置)
         return result;
     }
@@ -45,8 +36,11 @@ public class Equipment {
      * @param code 装备编号
      */
     public Equipment(String code) {
-        Map<String, Integer> config = this.getConfigByCode(code);
+        Map<String, Object> config = this.getConfigByCode(code);
         this.code = code;
+        if (config.containsKey("name")) {
+            this.name = String.valueOf(config.get("name"));
+        }
         ReflectionHelper.setFieldsValue(this, config);
     }
 }

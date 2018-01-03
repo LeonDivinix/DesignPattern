@@ -9,7 +9,7 @@ public class ReflectionHelper {
      * @param instance 对象实例
      * @param map 数据map值
      */
-    public static void setFieldsValue(Object instance, Map<String, Integer> map) {
+    public static void setFieldsValue(Object instance, Map<String, Object> map) {
 
     }
 }
